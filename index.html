@@ -3,9 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Please Wait...</title>
+    <title>Security Awareness Training | SOC Simulation</title>
+    
+    <!-- Google Fonts: Inter for clean enterprise typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        /* Reset defaults and center content */
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: rgba(22, 27, 34, 0.75);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --primary-blue: #2f81f7;
+            --primary-hover: #1f6beb;
+            --text-main: #f0f6fc;
+            --text-muted: #8b949e;
+            --success-green: #238636;
+            --accent-glow: rgba(47, 129, 247, 0.15);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -13,68 +30,227 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f4f7f6;
-            color: #333333;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            width: 100vw;
+            position: relative;
             overflow: hidden;
         }
 
-        /* Container styling */
-        .waiting-container {
-            text-align: center;
-            background: #ffffff;
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            max-width: 400px;
-            width: 90%;
-        }
-
-        /* CSS Animated Spinner */
-        .spinner {
-            width: 60px;
-            height: 60px;
-            border: 5px solid #e0e0e0;
-            border-top: 5px solid #3498db; /* Primary color */
+        /* Animated Ambient Background Glows */
+        body::before, body::after {
+            content: '';
+            position: absolute;
+            width: 350px;
+            height: 350px;
             border-radius: 50%;
-            margin: 0 auto 1.5rem auto;
-            animation: spin 1s linear infinite;
+            filter: blur(100px);
+            z-index: 0;
+            animation: floatGlow 10s infinite alternate ease-in-out;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        body::before {
+            background: rgba(47, 129, 247, 0.2);
+            top: 15%;
+            left: 20%;
         }
 
-        /* Typography */
-        h1 {
-            font-size: 1.5rem;
+        body::after {
+            background: rgba(35, 134, 54, 0.15);
+            bottom: 15%;
+            right: 20%;
+            animation-delay: -5s;
+        }
+
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, -30px) scale(1.1); }
+        }
+
+        /* Card Container */
+        .card {
+            position: relative;
+            z-index: 1;
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 440px;
+            width: 90%;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5),
+                        0 0 40px var(--accent-glow);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6),
+                        0 0 50px var(--accent-glow);
+        }
+
+        /* Security Badge Header */
+        .shield-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(47, 129, 247, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--primary-blue);
+            border: 1px solid rgba(47, 129, 247, 0.3);
+        }
+
+        /* Live Status Indicator */
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(35, 134, 54, 0.15);
+            color: #3fb950;
+            border: 1px solid rgba(63, 185, 80, 0.3);
+            font-size: 0.75rem;
             font-weight: 600;
-            margin-bottom: 0.75rem;
-            color: #2c3e50;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
         }
 
-        p {
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #3fb950;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #3fb950;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(63, 185, 80, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(63, 185, 80, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(63, 185, 80, 0); }
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+        }
+
+        p.description {
+            color: var(--text-muted);
             font-size: 0.95rem;
-            color: #7f8c8d;
-            line-height: 1.5;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+        /* Action Button */
+        .btn-primary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            background-color: var(--primary-blue);
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 14px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 4px 12px rgba(47, 129, 247, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(47, 129, 247, 0.4);
+        }
+
+        .btn-primary svg {
+            transition: transform 0.2s ease;
+        }
+
+        .btn-primary:hover svg {
+            transform: translateX(3px);
+        }
+
+        /* Educational Safeguard Note */
+        .educational-banner {
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid var(--card-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .educational-banner svg {
+            color: #3fb950;
+            flex-shrink: 0;
         }
     </style>
 </head>
+
 <body>
 
-    <div class="waiting-container">
-        <!-- Spinner Graphics -->
-        <div class="spinner"></div>
-        
-        <!-- Status Messages -->
-        <h1>Please Wait</h1>
-        <p>We are processing your request. This will only take a moment. Please do not refresh or close this window.</p>
+    <div class="card">
+        <!-- Security Icon Header -->
+        <div class="shield-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <path d="m9 12 2 2 4-4"/>
+            </svg>
+        </div>
+
+        <!-- Status Badge -->
+        <div class="status-pill">
+            <span class="pulse-dot"></span>
+            SOC Awareness Exercise
+        </div>
+
+        <h2>Phishing Simulation Test</h2>
+
+        <p class="description">
+            This interaction is part of an officially authorized security training program designed to enhance organizational threat awareness.
+        </p>
+
+        <!-- Main Action Button -->
+        <a class="btn-primary" 
+           href="https://www.facebook.com/" 
+           target="_blank" 
+           rel="noopener noreferrer">
+            <span>Proceed to Facebook</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+        </a>
+
+        <!-- Educational Disclaimer -->
+        <div class="educational-banner">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <span>Safe & Confidential — No credentials are logged or saved.</span>
+        </div>
     </div>
 
 </body>
